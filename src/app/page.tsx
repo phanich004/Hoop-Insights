@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { UploadCloud, Clapperboard, Medal, BrainCircuit, PlayCircle, Loader2 } from "lucide-react";
+import { UploadCloud, Clapperboard, Medal, BrainCircuit, PlayCircle, Loader2, Mic, ThumbsUp, ThumbsDown } from "lucide-react";
 
 export default function Home() {
   const [videoFile, setVideoFile] = useState<File | null>(null);
@@ -160,6 +160,17 @@ export default function Home() {
                       <Skeleton className="h-4 w-5/6" />
                     </CardContent>
                   </Card>
+                  <Card className="shadow-lg animate-pulse">
+                    <CardHeader>
+                      <Skeleton className="h-6 w-1/2" />
+                      <Skeleton className="h-4 w-3/4" />
+                    </CardHeader>
+                    <CardContent className="space-y-4 p-6">
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-5/6" />
+                    </CardContent>
+                  </Card>
                 </>
               )}
 
@@ -179,10 +190,33 @@ export default function Home() {
                   <Card className="shadow-lg">
                     <CardHeader>
                       <CardTitle className="font-headline text-2xl flex items-center gap-2"><BrainCircuit className="w-6 h-6 text-primary"/>AI Game Analysis</CardTitle>
-                      <CardDescription>Personalized feedback on your performance.</CardDescription>
+                      <CardDescription>Strengths and weaknesses from your game.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                        <div className="flex gap-4">
+                            <ThumbsUp className="w-6 h-6 text-accent mt-1 flex-shrink-0" />
+                            <div>
+                                <h3 className="font-semibold text-lg">Strengths</h3>
+                                <p className="text-base leading-relaxed text-muted-foreground">{analysis.analysis.strengths}</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-4">
+                            <ThumbsDown className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
+                            <div>
+                                <h3 className="font-semibold text-lg">Weaknesses</h3>
+                                <p className="text-base leading-relaxed text-muted-foreground">{analysis.analysis.weaknesses}</p>
+                            </div>
+                        </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="shadow-lg">
+                    <CardHeader>
+                      <CardTitle className="font-headline text-2xl flex items-center gap-2"><Mic className="w-6 h-6 text-primary"/>Live Commentary</CardTitle>
+                      <CardDescription>A play-by-play of the action.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-base leading-relaxed">{analysis.feedback}</p>
+                      <p className="text-base leading-relaxed">{analysis.commentary}</p>
                     </CardContent>
                   </Card>
                 </>
